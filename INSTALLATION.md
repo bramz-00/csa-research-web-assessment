@@ -23,8 +23,8 @@ git --version
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-cd YOUR_REPO_NAME
+git clone https://github.com/bramz-00/csa-research-web-assessment.git
+cd csa-research-web-assessment
 ```
 
 ### 2. Environment Configuration

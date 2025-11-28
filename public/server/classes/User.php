@@ -5,19 +5,20 @@ require_once    '../config/Database.php';
 
 class User
 {
+    // properties
     private $id;
     private $name;
     private $email;
     private $password; 
-    private $is_active;
+    
 
-    public function __construct($name, $email, $password = null, $is_active = 1)
+     // constructor
+    public function __construct($name, $email, $password = null)
     {
         $this->name = $name;
         $this->email = $email;
         if ($password !== null)
             $this->setPassword($password);
-        $this->is_active = $is_active;
     }
 
     // getters
@@ -33,33 +34,30 @@ class User
     {
         return $this->id;
     }
-    public function isActive()
-    {
-        return $this->is_active;
-    }
-
+    // setters
     public function setPassword($password)
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    // persist user
-    public function save()
-    {
-        $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, password, is_active) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$this->name, $this->email, $this->password, $this->is_active]);
-        $this->id = $pdo->lastInsertId();
-        return $this->id;
     }
 
     // static: get all users
     public static function getAllUsers()
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->query("SELECT id, name, email, is_active, created_at FROM users");
+        $stmt = $pdo->query("SELECT id, name, email, created_at FROM users");
         return $stmt->fetchAll();
     }
+
+    // persist user
+    public function save()
+    {
+        $pdo = Database::getConnection();
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
+        $stmt->execute([$this->name, $this->email, $this->password]);
+        $this->id = $pdo->lastInsertId();
+        return $this->id;
+    }
+
 
     // static: find by email
     public static function findByEmail($email)
@@ -74,7 +72,7 @@ class User
     public static function findById($id)
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, is_active, created_at FROM users WHERE id = ? LIMIT 1");
+        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE id = ? LIMIT 1");
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
@@ -83,7 +81,7 @@ class User
     public static function getRecentActive($limit = 50)
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE is_active = 1 ORDER BY created_at DESC LIMIT ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users ORDER BY created_at DESC LIMIT ?");
         $stmt->bindValue(1, (int) $limit, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();
