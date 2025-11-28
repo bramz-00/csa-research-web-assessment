@@ -107,21 +107,24 @@ Once installed, you can access:
 │   └── Dockerfile              # PHP Apache container configuration
 ├── public/                     # Web root directory
 │   ├── index.php              # Home page with conditional navigation
+│   ├── api/                   # API endpoints (organized by domain)
+│   │   ├── auth/              # Authentication endpoints
+│   │   │   ├── login.php
+│   │   │   └── logout.php
+│   │   └── users/             # User management endpoints
+│   │       ├── create.php
+│   │       ├── delete.php
+│   │       ├── get_user.php
+│   │       ├── list.php
+│   │       ├── update.php
+│   │       └── upload.php
 │   ├── client/                # Frontend files
 │   │   ├── assets/
 │   │   │   └── app.js         # Client-side JavaScript
 │   │   ├── form.html          # User registration/edit form
 │   │   ├── login.html         # Login page
 │   │   └── list.html          # User list with CRUD operations
-│   └── server/                # Backend files
-│       ├── api/               # API endpoints
-│       │   ├── create.php
-│       │   ├── delete.php
-│       │   ├── get_user.php
-│       │   ├── list.php
-│       │   ├── login.php
-│       │   ├── logout.php
-│       │   └── update.php
+│   └── server/                # Backend core files
 │       ├── classes/           # PHP classes
 │       │   └── User.php
 │       ├── config/            # Configuration files
@@ -134,7 +137,9 @@ Once installed, you can access:
 ├── sql/
 │   └── schema.sql             # Database schema
 ├── docker-compose.yml         # Docker services configuration
-└── .env                       # Environment variables
+├── .env                       # Environment variables (not in git)
+├── .env.example               # Environment template
+└── .gitignore                 # Git ignore rules
 ```
 
 ## 🔧 Configuration
@@ -305,7 +310,7 @@ docker exec -i assessment_db mysql -uappuser -papppassword assessment_db < sql/s
 ### Adding New Features
 
 - **Frontend:** Add/modify files in `public/client/`
-- **Backend API:** Add endpoints in `public/server/api/`
+- **Backend API:** Add endpoints in `public//api/`
 - **Database:** Update `sql/schema.sql` and re-import
 
 ## 🤝 Support

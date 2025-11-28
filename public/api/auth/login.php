@@ -1,7 +1,6 @@
 <?php
 require_once __DIR__ . '/../../server/controllers/UserController.php';
 use App\UserController;
-use App\Csrf;
 header('Content-Type: application/json');
 $input = json_decode(file_get_contents('php://input'), true);
 $email = $input['email'] ?? '';

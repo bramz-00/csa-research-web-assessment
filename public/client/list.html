@@ -42,17 +42,16 @@
             </tr>
         </thead>
         <tbody id="userList">
-            <!-- Users will be loaded here -->
         </tbody>
     </table>
 
     <script>
         async function logout() {
-            await fetch('/server/api/logout.php');
+            await fetch('/api/auth/logout.php');
             location.href = '/client/login.html';
         }
         async function loadUsers() {
-            const res = await fetch('/server/api/list.php');
+            const res = await fetch('/api/users/list.php');
             if (res.status === 401 || res.status === 403) {
                 window.location.href = '/client/login.html';
                 return;
@@ -93,7 +92,7 @@
             const csrfJson = await csrfRes.json();
             const token = csrfJson.token;
 
-            const res = await fetch('/server/api/delete.php', {
+            const res = await fetch('/api/users/delete.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -52,7 +52,7 @@ $isLoggedIn = isset($_SESSION['user']);
 
       <script>
         async function logout() {
-          await fetch('/server/api/logout.php');
+          await fetch('/api/logout.php');
           location.reload();
         }
       </script>

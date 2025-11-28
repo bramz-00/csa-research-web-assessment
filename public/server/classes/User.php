@@ -1,7 +1,7 @@
 <?php
 namespace App;
 
-require_once '../config/Database.php';
+require_once __DIR__ . '/../config/Database.php';
 
 class User
 {
@@ -10,15 +10,17 @@ class User
     private string $name;
     private string $email;
     private string $password;
-
+    private int $is_active;
 
     // constructor
- public function __construct($name, $email, $password = null) {
+    public function __construct($name, $email, $password = null, $is_active = 1)
+    {
         $this->name = $name;
         $this->email = $email;
         if ($password !== null) {
             $this->setPassword($password);
         }
+        $this->is_active = $is_active;
     }
 
     // getters
@@ -26,11 +28,15 @@ class User
     {
         return $this->name;
     }
-    
+
     // setters
     public function setPassword(string $password): void
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
+    }
+    public function isActive()
+    {
+        return $this->is_active;
     }
     // static: get all users
     public static function getAllUsers()
@@ -44,8 +50,8 @@ class User
     public function save()
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
-        $stmt->execute([$this->name, $this->email, $this->password]);
+        $stmt = $pdo->prepare("INSERT INTO users (name, email, password, is_active) VALUES (?, ?, ?, ?)");
+        $stmt->execute([$this->name, $this->email, $this->password, $this->is_active]);
         $this->id = (int) $pdo->lastInsertId();
         return $this->id;
     }
@@ -64,7 +70,7 @@ class User
     public static function findById($id)
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE id = ? LIMIT 1");
+        $stmt = $pdo->prepare("SELECT id, name, email,  is_active, created_at FROM users WHERE id = ? LIMIT 1");
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
@@ -73,7 +79,7 @@ class User
     public static function getRecentActive($limit = 50)
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users ORDER BY created_at DESC LIMIT ?");
+        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE is_active = 1  ORDER BY created_at DESC LIMIT ?");
         $stmt->bindValue(1, (int) $limit, \PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetchAll();

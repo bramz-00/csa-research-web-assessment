@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once  '../controllers/UserController.php';
+require_once  '../../server/controllers/UserController.php';
 use App\UserController;
 
 header('Content-Type: application/json');

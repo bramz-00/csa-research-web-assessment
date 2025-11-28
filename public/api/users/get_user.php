@@ -2,7 +2,7 @@
 require_once '../../server/controllers/UserController.php';
 use App\UserController;
 
-session_start();
+session_start();    
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user'])) {

@@ -1,9 +1,9 @@
 <?php
 namespace App;
 
-require_once '../config/Database.php';
+require_once __DIR__ . '/../config/Database.php';
 require_once __DIR__ . '/../classes/User.php';
-require_once '../config/Csrf.php';
+require_once __DIR__ . '/../config/Csrf.php';
 
 class UserController
 {
