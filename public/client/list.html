@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>User List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .btns {
+            margin-bottom: 40px;
+            gap: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>All Users</h1>
+    <div class="btns">
+        <button onclick="logout()">Logout</button>
+        <button onclick="loadUsers()">Refresh List</button>
+        <button onclick="location.href='/client/form.html'">Create New User</button>
+    </div>
+
+    <table border="1" cellpadding="5" cellspacing="2">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="userList">
+            <!-- Users will be loaded here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function logout() {
+            await fetch('/server/api/logout.php');
+            location.href = '/client/login.html';
+        }
+        async function loadUsers() {
+            const res = await fetch('/server/api/list.php');
+            if (res.status === 401 || res.status === 403) {
+                window.location.href = '/client/login.html';
+                return;
+            }
+            const users = await res.json();
+            const tbody = document.getElementById('userList');
+            tbody.innerHTML = "";
+
+            users.forEach(u => {
+                const tr = document.createElement('tr');
+
+                // Name column
+                const tdName = document.createElement('td');
+                tdName.textContent = u.name;
+                tr.appendChild(tdName);
+
+                // Email column
+                const tdEmail = document.createElement('td');
+                tdEmail.textContent = u.email;
+                tr.appendChild(tdEmail);
+
+                // Actions column
+                const tdActions = document.createElement('td');
+                tdActions.innerHTML = `
+            <button onclick="location.href='/client/form.html?id=${u.id}'">Edit</button>
+            <button onclick="deleteUser(${u.id})">Delete</button>
+        `;
+                tr.appendChild(tdActions);
+
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function deleteUser(id) {
+            if (!confirm('Are you sure?')) return;
+
+            const csrfRes = await fetch('/server/utils/get_csrf.php');
+            const csrfJson = await csrfRes.json();
+            const token = csrfJson.token;
+
+            const res = await fetch('/server/api/delete.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-Token': token
+                },
+                body: JSON.stringify({ id })
+            });
+
+            const json = await res.json();
+            if (json.success) {
+                loadUsers();
+            } else {
+                alert('Error deleting user');
+            }
+        }
+
+        loadUsers();
+    </script>
+
+
+</body>
+
+</html>
