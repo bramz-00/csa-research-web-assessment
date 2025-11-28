@@ -22,8 +22,8 @@ class UserController
         }
 
         $user = new User($input['name'], $input['email'], $input['password']);
-        $user->save();
-        return ['success' => true, 'message' => 'User created successfully'];
+        $id = $user->save();
+        return ['success' => true, 'id' => $id, 'message' => 'User created successfully'];
     }
 
     public static function listAll()

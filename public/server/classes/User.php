@@ -1,8 +1,6 @@
 <?php
 namespace App;
 
-require_once __DIR__ . '/../config/Database.php';
-
 class User
 {
     // properties

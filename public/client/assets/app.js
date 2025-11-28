@@ -25,9 +25,9 @@ async function submitForm(e) {
 
     if (id) {
         url = `/api/users/update.php/${id}`;
-        method = 'PUT';  
+        method = 'PUT';
     } else {
-        url = '/api/users/create.php';
+        url = '/api/auth/register.php';
     }
 
     try {
@@ -40,17 +40,33 @@ async function submitForm(e) {
             body: JSON.stringify(body)
         });
 
-        const json = await res.json();
+        // Read response as text first
+        const responseText = await res.text();
+
+        let json;
+        try {
+            json = JSON.parse(responseText);
+        } catch (parseError) {
+            console.error('JSON parse error:', parseError);
+            console.error('Response text:', responseText);
+            alert('Server error: Invalid response format. Check console for details.');
+            return;
+        }
 
         if (res.ok && (json.success || json.message)) {
-            alert(id ? 'User updated successfully!' : 'User created successfully!');
+            const message = id
+                ? 'User updated successfully!'
+                : (json.message || 'Registration successful! You are now logged in.');
+            alert(message);
             window.location.href = '/client/list.html';
         } else {
-            alert('Error : ' + (json.error || JSON.stringify(json)));
+            // Show specific error message
+            const errorMsg = json.error || json.message || 'Unknown error occurred';
+            alert('Error: ' + errorMsg);
         }
     } catch (err) {
-        console.error(err);
-        alert('Error');
+        console.error('Request error:', err);
+        alert('Network error: ' + err.message);
     }
 }
 
