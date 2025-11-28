@@ -4,6 +4,7 @@ services:
     container_name: assessment_php
     volumes:
       - ./public:/var/www/html
+      - ./uploads:/var/www/uploads
     ports:
       - "8000:80"
     depends_on:

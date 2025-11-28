@@ -13,6 +13,8 @@ Base URL: `http://localhost:8000`
   - [Create User](#create-user)
   - [Update User](#update-user)
   - [Delete User](#delete-user)
+- [File Upload](#file-upload)
+  - [Upload File](#upload-file)
 - [CSRF Token](#csrf-token)
 - [Error Responses](#error-responses)
 
@@ -452,6 +454,119 @@ curl -X POST http://localhost:8000/api/users/delete.php \
     "id": 3
   }'
 ```
+
+---
+
+## File Upload
+
+### Upload File
+
+Upload a file (JPEG, PNG, or PDF) to the server.
+
+**Endpoint:** `POST /api/users/upload.php`
+
+**Headers:**
+```
+Content-Type: multipart/form-data
+X-CSRF-Token: {csrf_token}
+```
+
+**Request Body:**
+- Form data with a `file` field containing the file to upload
+
+**Allowed File Types:**
+- JPEG (`.jpg`, `.jpeg`)
+- PNG (`.png`)
+- PDF (`.pdf`)
+
+**Maximum File Size:** 5 MB
+
+**Success Response (200 OK):**
+```json
+{
+  "success": true,
+  "message": "File uploaded successfully",
+  "filename": "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6.jpg",
+  "size": 245678,
+  "type": "image/jpeg"
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "File too large. Maximum allowed: 5 MB"
+}
+```
+
+**Error Response (400 Bad Request):**
+```json
+{
+  "error": "Invalid file type. Allowed: JPEG, PNG, PDF"
+}
+```
+
+**Error Response (403 Forbidden):**
+```json
+{
+  "error": "Invalid or missing CSRF token"
+}
+```
+
+**Error Response (500 Internal Server Error):**
+```json
+{
+  "error": "Server error during upload. Please try again."
+}
+```
+
+**Example (cURL):**
+```bash
+# Get CSRF token first
+TOKEN=$(curl -s http://localhost:8000/server/utils/get_csrf.php | jq -r '.token')
+
+# Upload file
+curl -X POST http://localhost:8000/api/users/upload.php \
+  -H "X-CSRF-Token: $TOKEN" \
+  -F "file=@/path/to/your/file.jpg"
+```
+
+**Example (JavaScript):**
+```javascript
+// Get CSRF token
+const tokenRes = await fetch('/server/utils/get_csrf.php');
+const { token } = await tokenRes.json();
+
+// Prepare form data
+const formData = new FormData();
+formData.append('file', fileInput.files[0]);
+
+// Upload
+const res = await fetch('/api/users/upload.php', {
+    method: 'POST',
+    headers: { 'X-CSRF-Token': token },
+    body: formData
+});
+
+const json = await res.json();
+console.log(json);
+```
+
+**Upload Location:**
+- Files are stored in `/uploads/` directory at project root
+- Filenames are randomly generated for security (32 hex characters + extension)
+- Example: `a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6.jpg`
+
+**Security Features:**
+- CSRF token protection
+- MIME type validation using `finfo`
+- File size limit (5 MB)
+- Random filename generation
+- Secure file type whitelist
+- Comprehensive error handling
+
+**UI Page:**
+- Visit `/client/upload.html` for a user-friendly upload interface
 
 ---
 

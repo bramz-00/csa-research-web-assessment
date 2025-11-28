@@ -77,10 +77,19 @@ class User
     public static function getRecentActive($limit = 50)
     {
         $pdo = Database::getConnection();
-        $stmt = $pdo->prepare("SELECT id, name, email, created_at FROM users WHERE is_active = 1  ORDER BY created_at DESC LIMIT ?");
+
+        $sql = "SELECT 
+                id, name, email, created_at 
+            FROM users 
+            WHERE is_active = 1 
+            ORDER BY created_at DESC 
+            LIMIT ?";
+
+        $stmt = $pdo->prepare($sql);
         $stmt->bindValue(1, (int) $limit, \PDO::PARAM_INT);
         $stmt->execute();
-        return $stmt->fetchAll();
+
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     // update & delete helpers (simple)

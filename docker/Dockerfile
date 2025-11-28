@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y \
 # Set working dir
 WORKDIR /var/www/html
 
+# Copy custom PHP configuration for uploads
+COPY uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+
 # Copy custom Apache config
 
 # Copy composer if you want (optional)
