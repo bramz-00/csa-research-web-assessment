@@ -16,5 +16,7 @@ if (!$user) {
 
 // create simple session
 session_start();
+session_regenerate_id(true);
+
 $_SESSION['user'] = $user;
 echo json_encode(['success' => true, 'user' => $user]);

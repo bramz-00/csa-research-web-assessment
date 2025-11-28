@@ -1,30 +1,29 @@
 <?php
 namespace App;
 
-require_once  '../config/Database.php';
+require_once '../config/Database.php';
 require_once __DIR__ . '/../classes/User.php';
-require_once  '../config/Csrf.php';
+require_once '../config/Csrf.php';
 
 class UserController
 {
 
     public static function create($input)
     {
-        // basic validation
+        // Validation
         if (empty($input['name']) || empty($input['email']) || empty($input['password'])) {
             http_response_code(422);
             return ['error' => 'Missing fields'];
         }
 
-        // check if email exists
         if (User::findByEmail($input['email'])) {
             http_response_code(409);
             return ['error' => 'Email already exists'];
         }
 
         $user = new User($input['name'], $input['email'], $input['password']);
-        $id = $user->save();
-        return ['success' => true, 'id' => $id];
+        $user->save();
+        return ['success' => true, 'message' => 'User created successfully'];
     }
 
     public static function listAll()
@@ -52,14 +51,16 @@ class UserController
         return User::delete($id);
     }
 
-    public static function login($email, $password)
+    public static function login(string $email, string $password): ?array
     {
-        $row = User::findByEmail($email);
-        if (!$row)
-            return null;
-        if (!password_verify($password, $row['password']))
-            return null;
-        unset($row['password']);
-        return $row;
+        $user = User::findByEmail($email);
+
+        // User not found or wrong password
+        if (!$user || !password_verify($password, $user['password'])) {
+            return null; // Do NOT reveal which one is wrong (security)
+        }
+
+        unset($user['password']);
+        return $user;
     }
 }

@@ -1,45 +1,37 @@
 <?php
 namespace App;
 
-require_once    '../config/Database.php';
+require_once '../config/Database.php';
 
 class User
 {
     // properties
-    private $id;
-    private $name;
-    private $email;
-    private $password; 
-    
+    private int $id;
+    private string $name;
+    private string $email;
+    private string $password;
 
-     // constructor
-    public function __construct($name, $email, $password = null)
-    {
+
+    // constructor
+ public function __construct($name, $email, $password = null) {
         $this->name = $name;
         $this->email = $email;
-        if ($password !== null)
+        if ($password !== null) {
             $this->setPassword($password);
+        }
     }
 
     // getters
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
-    public function getEmail()
-    {
-        return $this->email;
-    }
-    public function getId()
-    {
-        return $this->id;
-    }
+    
     // setters
-    public function setPassword($password)
+    public function setPassword(string $password): void
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
-
     // static: get all users
     public static function getAllUsers()
     {
@@ -54,7 +46,7 @@ class User
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
         $stmt->execute([$this->name, $this->email, $this->password]);
-        $this->id = $pdo->lastInsertId();
+        $this->id = (int) $pdo->lastInsertId();
         return $this->id;
     }
 
