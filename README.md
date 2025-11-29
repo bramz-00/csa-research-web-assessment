@@ -246,26 +246,16 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Author
 
-**Your Name**
+**ZAKARIA BRAHAM**
 - GitHub: [@bramz-00](https://github.com/bramz-00)
 - Repository: [csa-research-web-assessment](https://github.com/bramz-00/csa-research-web-assessment)
-
-## 🙏 Acknowledgments
-
-- Built with modern web development best practices
-- Inspired by real-world application requirements
-- Developed as a technical assessment demonstration
-
----
 
 **⭐ If you find this project useful, please consider giving it a star!**
 
 ## 📞 Support
 
 For issues, questions, or suggestions:
-- Open an issue on [GitHub](https://github.com/YOUR_USERNAME/csa-search-test/issues)
-- Check the [documentation](DOCUMENTATION.md)
-- Review the [API reference](API.md)
+- Open an issue on [GitHub](https://github.com/bramz-00/csa-search-test/issues)
 
 ---
 
