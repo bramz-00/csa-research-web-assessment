@@ -17,11 +17,13 @@ $isLoggedIn = isset($_SESSION['user']);
       justify-content: center;
       flex-direction: column;
     }
+
     main {
-        display: flex;
-          align-items: center;
-          justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
     .btn {
       display: inline-block;
       padding: 12px 10px;
@@ -60,7 +62,15 @@ $isLoggedIn = isset($_SESSION['user']);
       <a href="/client/form.html" class="btn">Register</a>
       <a href="/client/login.html" class="btn">Login</a>
     <?php endif; ?>
-    </main>
+  </main>
+
+  <hr style="width: 80%; margin: 40px 0;">
+
+  <h2>📚 Demos & Assessments</h2>
+  <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+    <a href="/client/es6-assessment.html" class="btn" style="background-color: #28a745;">JavaScript ES6 Assessment</a>
+    <a href="/client/upload.html" class="btn" style="background-color: #17a2b8;">File Upload Demo</a>
+  </div>
 
 </body>
 

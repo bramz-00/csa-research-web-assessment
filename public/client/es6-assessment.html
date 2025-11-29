@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript ES6 Assessment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-top: 30px;
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #007bff;
+        }
+
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .output {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .success {
+            color: #4caf50;
+        }
+
+        .error {
+            color: #f44336;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .nav {
+            background: #007bff;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 5px 10px;
+            border-radius: 3px;
+        }
+
+        .nav a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <strong>JavaScript ES6 Assessment</strong>
+        <a href="/">← Home</a>
+    </div>
+
+    <div class="container">
+        <h1>📚 JavaScript ES6 Assessment Solutions</h1>
+        <p>Complete implementations of all ES6 exercises with error handling and best practices.</p>
+    </div>
+
+    <!-- Exercise 1: Arrow Functions & Promises -->
+    <div class="container">
+        <h2>1️⃣ Arrow Functions & Promises</h2>
+        <div class="exercise">
+            <p><strong>Task:</strong> Fetch user data from an API using ES6 arrow functions and promises.</p>
+
+            <button onclick="exercise1_fetchUser()">Fetch User (Success)</button>
+            <button onclick="exercise1_fetchUserError()">Fetch User (Error Handling)</button>
+            <button onclick="exercise1_fetchMultipleUsers()">Fetch Multiple Users (Promise.all)</button>
+
+            <div id="output1" class="output"></div>
+        </div>
+    </div>
+
+    <!-- Exercise 2: Destructuring & Spread Operator -->
+    <div class="container">
+        <h2>2️⃣ Destructuring & Spread Operator</h2>
+        <div class="exercise">
+            <p><strong>Task:</strong> Remove email from user object using destructuring and spread operator.</p>
+
+            <button onclick="exercise2_removeEmail()">Remove Email Property</button>
+            <button onclick="exercise2_deepClone()">Deep Clone with Nested Objects</button>
+            <button onclick="exercise2_mergeUsers()">Merge Multiple Users</button>
+
+            <div id="output2" class="output"></div>
+        </div>
+    </div>
+
+    <!-- Exercise 3: PHP & JavaScript Integration -->
+    <div class="container">
+        <h2>3️⃣ PHP & JavaScript Integration (AJAX Form)</h2>
+        <div class="exercise">
+            <p><strong>Task:</strong> Submit form data to PHP backend using fetch() API.</p>
+
+            <form id="userForm" onsubmit="exercise3_submitForm(event)">
+                <label for="userName">Name:</label>
+                <input type="text" id="userName" name="name" required placeholder="John Doe">
+
+                <label for="userEmail">Email:</label>
+                <input type="email" id="userEmail" name="email" required placeholder="john@example.com">
+
+                <button type="submit">Submit to Backend</button>
+            </form>
+
+            <div id="output3" class="output"></div>
+        </div>
+    </div>
+
+    <script src="/client/assets/es6-assessment.js"></script>
+</body>
+
+</html>
