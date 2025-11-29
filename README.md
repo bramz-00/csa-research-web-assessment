@@ -82,8 +82,8 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/csa-search-test.git
-cd csa-search-test
+git clone https://github.com/bramz-00/csa-research-web-assessment.git
+cd csa-research-web-assessment
 
 # 2. Start the application
 docker compose up -d --build
@@ -136,7 +136,7 @@ DB_PASS=apppassword
 ## 📁 Project Structure
 
 ```
-csa-search-test/
+csa-research-web-assessment/
 ├── docker/                     # Docker configuration
 │   ├── Dockerfile             # PHP Apache container
 │   └── uploads.ini            # PHP upload settings
@@ -255,7 +255,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## 📞 Support
 
 For issues, questions, or suggestions:
-- Open an issue on [GitHub](https://github.com/bramz-00/csa-search-test/issues)
+- Open an issue on [GitHub](https://github.com/bramz-00/csa-research-web-assessment/issues)
 
 ---
 
