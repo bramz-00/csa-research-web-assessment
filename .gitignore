@@ -1,9 +1,12 @@
 # Environment files
 .env
 
-# Uploaded files
+# Uploaded files (exclude from repo)
 /uploads/*
 !uploads/.gitkeep
+
+# Screenshots are kept in repo
+# /screenshots/
 
 # Docker volumes
 /data

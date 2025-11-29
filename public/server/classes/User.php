@@ -57,7 +57,7 @@ class User
 
     // static: find by email
     public static function findByEmail($email)
-    {
+    {   
         $pdo = Database::getConnection();
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ? LIMIT 1");
         $stmt->execute([$email]);

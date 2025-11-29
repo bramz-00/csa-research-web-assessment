@@ -5,7 +5,7 @@ use App\Csrf;
 use App\UserController;
 
 header('Content-Type: application/json');
-
+header('X-XSS-Protection: 1; mode=block');
 // CSRF token verification
 $csrfToken = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 if (!Csrf::verifyToken($csrfToken)) {
