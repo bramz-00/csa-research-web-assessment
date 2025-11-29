@@ -33,14 +33,6 @@
             margin-top: 30px;
         }
 
-        .exercise {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-            border-left: 4px solid #007bff;
-        }
-
         button {
             background: #007bff;
             color: white;
@@ -103,6 +95,9 @@
         .nav {
             background: #007bff;
             color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
@@ -113,6 +108,7 @@
             text-decoration: none;
             margin: 0 15px;
             padding: 5px 10px;
+            text-decoration: underline;
             border-radius: 3px;
         }
 
@@ -125,23 +121,19 @@
 <body>
     <div class="nav">
         <strong>JavaScript ES6 Assessment</strong>
-        <a href="/">← Home</a>
+        <a href="/">Home</a>
     </div>
 
-    <div class="container">
-        <h1>📚 JavaScript ES6 Assessment Solutions</h1>
-        <p>Complete implementations of all ES6 exercises with error handling and best practices.</p>
-    </div>
+ 
 
     <!-- Exercise 1: Arrow Functions & Promises -->
     <div class="container">
-        <h2>1️⃣ Arrow Functions & Promises</h2>
-        <div class="exercise">
-            <p><strong>Task:</strong> Fetch user data from an API using ES6 arrow functions and promises.</p>
+        <h2>1. Arrow Functions & Promises</h2>
+        <div class="">
+            <p> Fetch user data from an API using ES6 arrow functions and promises.</p>
 
-            <button onclick="exercise1_fetchUser()">Fetch User (Success)</button>
-            <button onclick="exercise1_fetchUserError()">Fetch User (Error Handling)</button>
-            <button onclick="exercise1_fetchMultipleUsers()">Fetch Multiple Users (Promise.all)</button>
+            <button onclick="arrowFunctionsFetchUser()">Fetch User (Success)</button>
+            <button onclick="arrowFunctionsFetchUserError()">Fetch User (Error Handling)</button>
 
             <div id="output1" class="output"></div>
         </div>
@@ -149,13 +141,12 @@
 
     <!-- Exercise 2: Destructuring & Spread Operator -->
     <div class="container">
-        <h2>2️⃣ Destructuring & Spread Operator</h2>
-        <div class="exercise">
-            <p><strong>Task:</strong> Remove email from user object using destructuring and spread operator.</p>
+        <h2>2.Destructuring & Spread Operator</h2>
+        <div class="">
+            <p> Remove email from user object using destructuring and spread operator.</p>
 
-            <button onclick="exercise2_removeEmail()">Remove Email Property</button>
-            <button onclick="exercise2_deepClone()">Deep Clone with Nested Objects</button>
-            <button onclick="exercise2_mergeUsers()">Merge Multiple Users</button>
+            <button onclick="spreadOperatorDestructuring()">Remove Email Property</button>
+
 
             <div id="output2" class="output"></div>
         </div>
@@ -163,11 +154,11 @@
 
     <!-- Exercise 3: PHP & JavaScript Integration -->
     <div class="container">
-        <h2>3️⃣ PHP & JavaScript Integration (AJAX Form)</h2>
-        <div class="exercise">
-            <p><strong>Task:</strong> Submit form data to PHP backend using fetch() API.</p>
+        <h2>3. PHP & JavaScript Integration (AJAX Form)</h2>
+        <div class="">
+            <p> Submit form data to PHP backend using fetch() API.</p>
 
-            <form id="userForm" onsubmit="exercise3_submitForm(event)">
+            <form id="userForm" onsubmit="submitForm(event)">
                 <label for="userName">Name:</label>
                 <input type="text" id="userName" name="name" required placeholder="John Doe">
 

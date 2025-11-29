@@ -1,4 +1,4 @@
-# User Management System - Installation Guide
+# Web Dev Assissement  System - Installation Guide
 
 A PHP-based user management application with authentication, CRUD operations, and session management.
 

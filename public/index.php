@@ -45,7 +45,7 @@ $isLoggedIn = isset($_SESSION['user']);
 
 <body>
 
-  <h1>Welcome to User Management</h1>
+  <h1>Welcome to Web Assissement </h1>
   <main>
 
     <?php if ($isLoggedIn): ?>
@@ -54,7 +54,7 @@ $isLoggedIn = isset($_SESSION['user']);
 
       <script>
         async function logout() {
-          await fetch('/api/logout.php');
+          await fetch('/api/auth/logout.php');
           location.reload();
         }
       </script>
@@ -66,7 +66,6 @@ $isLoggedIn = isset($_SESSION['user']);
 
   <hr style="width: 80%; margin: 40px 0;">
 
-  <h2>📚 Demos & Assessments</h2>
   <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
     <a href="/client/es6-assessment.html" class="btn" style="background-color: #28a745;">JavaScript ES6 Assessment</a>
     <a href="/client/upload.html" class="btn" style="background-color: #17a2b8;">File Upload Demo</a>
